@@ -1,0 +1,40 @@
+{
+  "family": "ai-agent-worker",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "1024",
+  "memory": "2048",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "worker",
+      "image": "ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ai-agent-platform:latest",
+      "command": [
+        "celery", "-A", "app.workers.celery_config", "worker",
+        "--loglevel=info",
+        "-Q", "ai_processing,embeddings,crawler,governance,risk_assessment,hallucination,voice,analytics,cleanup,escalation",
+        "--concurrency=4"
+      ],
+      "environment": [
+        { "name": "AI_PROVIDER", "value": "openai" },
+        { "name": "LOG_LEVEL",   "value": "INFO" }
+      ],
+      "secrets": [
+        { "name": "DATABASE_URL",   "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/DATABASE_URL" },
+        { "name": "REDIS_URL",      "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/REDIS_URL" },
+        { "name": "OPENAI_API_KEY", "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/OPENAI_API_KEY" },
+        { "name": "SECRET_KEY",     "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/SECRET_KEY" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ai-agent-worker",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "worker"
+        }
+      },
+      "essential": true
+    }
+  ]
+}

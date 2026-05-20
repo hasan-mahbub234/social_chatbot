@@ -1,0 +1,12 @@
+Summarize the following conversation history into a concise rolling summary.
+Preserve: key decisions, important facts, user intent, unresolved questions.
+Remove: pleasantries, repetition, filler content.
+Maximum length: 300 words.
+
+Conversation:
+{conversation}
+
+Previous summary (if any):
+{previous_summary}
+
+Updated summary:

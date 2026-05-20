@@ -1,0 +1,14 @@
+Compress the following conversation memory into a compact representation.
+Goal: Reduce token usage while preserving essential context for future responses.
+Target: 150 words maximum.
+
+Memory to compress:
+{memory}
+
+Key information to preserve:
+- User's main goals and preferences
+- Important facts established
+- Decisions made
+- Open questions
+
+Compressed memory:

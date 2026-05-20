@@ -1,0 +1,50 @@
+{
+  "family": "ai-agent-web",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::ACCOUNT_ID:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "web",
+      "image": "ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/ai-agent-platform:latest",
+      "portMappings": [
+        {
+          "containerPort": 8000,
+          "protocol": "tcp"
+        }
+      ],
+      "environment": [
+        { "name": "AI_PROVIDER",    "value": "openai" },
+        { "name": "LOG_LEVEL",      "value": "INFO" },
+        { "name": "PORT",           "value": "8000" }
+      ],
+      "secrets": [
+        { "name": "DATABASE_URL",          "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/DATABASE_URL" },
+        { "name": "REDIS_URL",             "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/REDIS_URL" },
+        { "name": "SECRET_KEY",            "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/SECRET_KEY" },
+        { "name": "OPENAI_API_KEY",        "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/OPENAI_API_KEY" },
+        { "name": "STRIPE_SECRET_KEY",     "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/STRIPE_SECRET_KEY" },
+        { "name": "STRIPE_WEBHOOK_SECRET", "valueFrom": "arn:aws:secretsmanager:us-east-1:ACCOUNT_ID:secret:ai-agent/STRIPE_WEBHOOK_SECRET" }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/ai-agent-web",
+          "awslogs-region": "us-east-1",
+          "awslogs-stream-prefix": "web"
+        }
+      },
+      "healthCheck": {
+        "command": ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"],
+        "interval": 30,
+        "timeout": 10,
+        "retries": 3,
+        "startPeriod": 15
+      },
+      "essential": true
+    }
+  ]
+}

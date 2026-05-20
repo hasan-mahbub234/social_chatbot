@@ -1,0 +1,21 @@
+# Copy to terraform.tfvars and fill in real values
+# Never commit terraform.tfvars to git
+
+aws_region           = "us-east-1"
+app_name             = "ai-agent"
+environment          = "prod"
+
+# RDS
+db_instance_class    = "db.t3.small"
+db_password          = "CHANGE_ME_strong_password_here"
+
+# ElastiCache
+redis_node_type      = "cache.t3.micro"
+
+# ECS scaling
+web_desired_count    = 2
+worker_desired_count = 2
+web_cpu              = 512
+web_memory           = 1024
+worker_cpu           = 1024
+worker_memory        = 2048

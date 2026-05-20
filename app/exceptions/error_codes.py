@@ -1,0 +1,58 @@
+"""Error codes for the platform."""
+
+# Auth errors
+AUTH_INVALID_TOKEN = "AUTH_001"
+AUTH_EXPIRED_TOKEN = "AUTH_002"
+AUTH_MISSING_TOKEN = "AUTH_003"
+AUTH_INVALID_CREDENTIALS = "AUTH_004"
+AUTH_INACTIVE_USER = "AUTH_005"
+
+# Resource errors
+RESOURCE_NOT_FOUND = "RES_001"
+RESOURCE_ALREADY_EXISTS = "RES_002"
+RESOURCE_FORBIDDEN = "RES_003"
+
+# Validation errors
+VALIDATION_FAILED = "VAL_001"
+VALIDATION_INVALID_INPUT = "VAL_002"
+
+# AI errors
+AI_SERVICE_UNAVAILABLE = "AI_001"
+AI_RATE_LIMITED = "AI_002"
+AI_CONTEXT_TOO_LONG = "AI_003"
+AI_HALLUCINATION_DETECTED = "AI_004"
+
+# Governance errors
+GOV_POLICY_VIOLATION = "GOV_001"
+GOV_JAILBREAK_DETECTED = "GOV_002"
+GOV_PII_DETECTED = "GOV_003"
+GOV_CONTENT_BLOCKED = "GOV_004"
+
+# Risk errors
+RISK_HIGH_SCORE = "RISK_001"
+RISK_ESCALATED = "RISK_002"
+RISK_FRAUD_DETECTED = "RISK_003"
+
+# Rate limit
+RATE_LIMIT_EXCEEDED = "RATE_001"
+
+# System errors
+INTERNAL_ERROR = "SYS_001"
+DATABASE_ERROR = "SYS_002"
+CACHE_ERROR = "SYS_003"
+STORAGE_ERROR = "SYS_004"
+
+ERROR_MESSAGES = {
+    AUTH_INVALID_TOKEN: "Invalid or expired token",
+    AUTH_INVALID_CREDENTIALS: "Invalid email or password",
+    RESOURCE_NOT_FOUND: "Resource not found",
+    RESOURCE_FORBIDDEN: "Access denied",
+    VALIDATION_FAILED: "Validation failed",
+    AI_SERVICE_UNAVAILABLE: "AI service temporarily unavailable",
+    AI_HALLUCINATION_DETECTED: "Response quality check failed",
+    GOV_POLICY_VIOLATION: "Request violates usage policy",
+    GOV_JAILBREAK_DETECTED: "Jailbreak attempt detected",
+    RISK_ESCALATED: "Request escalated for review",
+    RATE_LIMIT_EXCEEDED: "Too many requests",
+    INTERNAL_ERROR: "An unexpected error occurred",
+}

@@ -1,0 +1,22 @@
+You are a PII detection AI. Identify all personally identifiable information in the following text.
+
+Text: {text}
+
+Identify:
+- Names
+- Email addresses
+- Phone numbers
+- Social Security Numbers
+- Credit card numbers
+- Physical addresses
+- Date of birth
+- Passport/ID numbers
+- IP addresses
+
+Respond in JSON:
+{
+  "has_pii": true/false,
+  "pii_types": ["email", "phone", ...],
+  "risk_level": "low|medium|high",
+  "recommendation": "redact|warn|allow"
+}

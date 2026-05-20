@@ -1,0 +1,20 @@
+You are a contradiction detection AI. Identify contradictions in the following text.
+
+Text: {text}
+
+Look for:
+- Self-contradictory statements
+- Logical inconsistencies
+- Conflicting facts
+- Contradictions with provided context
+
+Context (if available): {context}
+
+Respond in JSON:
+{
+  "has_contradictions": true/false,
+  "contradiction_score": 0.0-1.0,
+  "contradictions": [
+    {"statement1": "...", "statement2": "...", "explanation": "..."}
+  ]
+}

@@ -1,0 +1,433 @@
+{
+  "benchmark_version": "2.0",
+  "description": "Universal eCommerce benchmark — platform-agnostic queries covering all site types, product categories, and retrieval patterns. URLs are placeholders replaced at runtime with the organization's actual crawled URLs.",
+  "placeholder_note": "All URLs use {base_url} placeholder. The evaluator resolves these against the organization's crawled_pages at runtime.",
+  "query_categories": [
+    "product_lookup",
+    "attribute_query",
+    "variant_query",
+    "price_query",
+    "availability_query",
+    "logistics_query",
+    "category_query",
+    "brand_query",
+    "comparison_query",
+    "faq_query"
+  ],
+  "queries": [
+
+    {
+      "query_id": "q001",
+      "category": "product_lookup",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "show me the product details",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["title", "price", "availability", "brand", "description"]
+      },
+      "min_completeness": 0.75,
+      "notes": "Generic product lookup — any platform. Expects core fields."
+    },
+
+    {
+      "query_id": "q002",
+      "category": "variant_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "what sizes are available",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["size_options", "variants"]
+      },
+      "min_completeness": 0.60,
+      "notes": "Size variant query — expects size_options or variant list with size options."
+    },
+
+    {
+      "query_id": "q003",
+      "category": "variant_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "what colors does this come in",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["color", "variants"]
+      },
+      "min_completeness": 0.60,
+      "notes": "Color variant query."
+    },
+
+    {
+      "query_id": "q004",
+      "category": "price_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "how much does it cost",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["price", "currency"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Price query — must return price and currency. Never hallucinate."
+    },
+
+    {
+      "query_id": "q005",
+      "category": "price_query",
+      "platform_tags": ["shopify", "woocommerce"],
+      "query": "is there a sale or discount",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["price", "compare_at_price"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Promotion/discount query — expects compare_at_price if on sale."
+    },
+
+    {
+      "query_id": "q006",
+      "category": "availability_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "is this in stock",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["availability"]
+      },
+      "min_completeness": 0.40,
+      "notes": "Stock availability query — must return In Stock / Out of Stock. Never guess."
+    },
+
+    {
+      "query_id": "q007",
+      "category": "availability_query",
+      "platform_tags": ["shopify", "woocommerce"],
+      "query": "which sizes are out of stock",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["variants"]
+      },
+      "min_completeness": 0.60,
+      "notes": "Per-variant availability query — requires variant-level availability data."
+    },
+
+    {
+      "query_id": "q008",
+      "category": "attribute_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "what material is this made of",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["material"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Material/fabric attribute query."
+    },
+
+    {
+      "query_id": "q009",
+      "category": "attribute_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "how do I wash or care for this product",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["care_instructions"]
+      },
+      "min_completeness": 0.40,
+      "notes": "Care instructions query — often in metafields/DOM tabs."
+    },
+
+    {
+      "query_id": "q010",
+      "category": "attribute_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "what brand is this",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["brand"]
+      },
+      "min_completeness": 0.40,
+      "notes": "Brand query."
+    },
+
+    {
+      "query_id": "q011",
+      "category": "logistics_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "what is the shipping policy",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["shipping_info"]
+      },
+      "min_completeness": 0.30,
+      "notes": "Shipping policy query — often in metafields, policy pages, or DOM tabs."
+    },
+
+    {
+      "query_id": "q012",
+      "category": "logistics_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "what is the return or exchange policy",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["return_policy"]
+      },
+      "min_completeness": 0.30,
+      "notes": "Return/exchange policy query."
+    },
+
+    {
+      "query_id": "q013",
+      "category": "logistics_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "how long does delivery take",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["shipping_info"]
+      },
+      "min_completeness": 0.30,
+      "notes": "Delivery time query — subset of shipping_info."
+    },
+
+    {
+      "query_id": "q014",
+      "category": "variant_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "show me all variants with their prices and SKUs",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["variants", "sku"]
+      },
+      "min_completeness": 0.75,
+      "notes": "Full variant graph query — requires complete variant list with SKUs and prices."
+    },
+
+    {
+      "query_id": "q015",
+      "category": "product_lookup",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "give me the full product description",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["description"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Description query — expects non-empty description field."
+    },
+
+    {
+      "query_id": "q016",
+      "category": "category_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "show me all products in this category",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["title", "price", "availability"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Category/collection listing query — multi-product response expected."
+    },
+
+    {
+      "query_id": "q017",
+      "category": "brand_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "show me all products from this brand",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["brand", "title", "price"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Brand-filtered product listing query."
+    },
+
+    {
+      "query_id": "q018",
+      "category": "comparison_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "compare prices across variants",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["variants", "price"]
+      },
+      "min_completeness": 0.65,
+      "notes": "Price comparison across variants — requires full variant price list."
+    },
+
+    {
+      "query_id": "q019",
+      "category": "faq_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "frequently asked questions about this product",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["description"]
+      },
+      "min_completeness": 0.30,
+      "notes": "FAQ query — expects FAQ chunks or description with Q&A content."
+    },
+
+    {
+      "query_id": "q020",
+      "category": "attribute_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "what are the dimensions or weight",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["dimensions", "weight"]
+      },
+      "min_completeness": 0.30,
+      "notes": "Physical attribute query — dimensions/weight often missing, triggers fallback."
+    },
+
+    {
+      "query_id": "q021",
+      "category": "product_lookup",
+      "platform_tags": ["shopify"],
+      "query": "show me the product SKU",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["sku"]
+      },
+      "min_completeness": 0.40,
+      "notes": "SKU lookup — must return exact SKU, never fabricate."
+    },
+
+    {
+      "query_id": "q022",
+      "category": "availability_query",
+      "platform_tags": ["shopify", "woocommerce", "magento"],
+      "query": "is the large size available",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["variants"]
+      },
+      "min_completeness": 0.60,
+      "notes": "Size-specific availability — requires variant-level data."
+    },
+
+    {
+      "query_id": "q023",
+      "category": "price_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "what is the price range for all variants",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["price", "variants"]
+      },
+      "min_completeness": 0.65,
+      "notes": "Price range query across variants."
+    },
+
+    {
+      "query_id": "q024",
+      "category": "logistics_query",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "do you offer free shipping",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["shipping_info"]
+      },
+      "min_completeness": 0.30,
+      "notes": "Free shipping query — subset of shipping_info."
+    },
+
+    {
+      "query_id": "q025",
+      "category": "product_lookup",
+      "platform_tags": ["shopify", "woocommerce", "magento", "generic"],
+      "query": "is this product available for purchase",
+      "expected_urls": [],
+      "expected_skus": [],
+      "expected_prices": {},
+      "expected_fields": {
+        "*": ["availability", "price"]
+      },
+      "min_completeness": 0.50,
+      "notes": "Purchase availability query — requires both availability and price."
+    }
+
+  ],
+
+  "evaluation_config": {
+    "k": 3,
+    "completeness_full_threshold": 0.85,
+    "completeness_partial_threshold": 0.75,
+    "completeness_fallback_threshold": 0.75,
+    "hallucination_price_tolerance_pct": 5.0,
+    "url_resolution": "runtime",
+    "note": "expected_urls are empty by design — resolved at runtime from the organization's crawled_pages. The evaluator matches retrieved chunks against the org's actual product URLs."
+  },
+
+  "field_criticality": {
+    "title":            "critical",
+    "price":            "critical",
+    "availability":     "critical",
+    "sku":              "critical",
+    "variants":         "critical",
+    "brand":            "high",
+    "description":      "high",
+    "material":         "medium",
+    "color":            "medium",
+    "size_options":     "medium",
+    "shipping_info":    "medium",
+    "return_policy":    "medium",
+    "care_instructions":"low",
+    "dimensions":       "low",
+    "weight":           "low",
+    "compare_at_price": "low",
+    "tags":             "low"
+  },
+
+  "platform_coverage": {
+    "shopify":          ["q001","q002","q003","q004","q005","q006","q007","q008","q009","q010","q011","q012","q013","q014","q015","q016","q017","q018","q019","q020","q021","q022","q023","q024","q025"],
+    "woocommerce":      ["q001","q002","q003","q004","q005","q006","q007","q008","q009","q010","q011","q012","q013","q014","q015","q016","q017","q018","q019","q020","q022","q023","q024","q025"],
+    "magento":          ["q001","q002","q003","q004","q006","q007","q008","q009","q010","q011","q012","q013","q014","q015","q016","q017","q018","q019","q020","q022","q023","q024","q025"],
+    "headless_nextjs":  ["q001","q002","q003","q004","q006","q008","q010","q011","q012","q015","q016","q017","q019","q025"],
+    "generic":          ["q001","q004","q006","q010","q011","q012","q013","q015","q016","q017","q019","q024","q025"]
+  }
+}

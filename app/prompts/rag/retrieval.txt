@@ -1,0 +1,16 @@
+You are a retrieval AI. Given the user query and available document chunks, select the most relevant context.
+
+User query: {query}
+
+Available chunks:
+{chunks}
+
+Select the top {top_k} most relevant chunks that would help answer the query.
+Prioritize: accuracy, recency, specificity.
+
+Respond in JSON:
+{
+  "selected_chunks": [0, 2, 4],
+  "relevance_scores": [0.95, 0.87, 0.72],
+  "reasoning": "explanation of selection"
+}
