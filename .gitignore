@@ -1,4 +1,60 @@
-# v0 sandbox internal files
+# ── Environment variables ─────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ── Virtual environments ──────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── Testing / coverage ────────────────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# ── Type checking / linting ───────────────────────────────
+.mypy_cache/
+.ruff_cache/
+
+# ── IDE ───────────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# ── Logs ─────────────────────────────────────────────────
+*.log
+logs/
+
+# ── Alembic generated (keep versions, ignore cache) ───────
+alembic/__pycache__/
+
+# ── Docker ────────────────────────────────────────────────
+docker-compose.override.yml
+
+# ── Secrets / keys ────────────────────────────────────────
+*.pem
+*.key
+*.p12
+secrets/
+
+# ── v0 sandbox internal ───────────────────────────────────
 __v0_runtime_loader.js
 __v0_devtools.tsx
 __v0_jsx-dev-runtime.ts
@@ -6,10 +62,6 @@ __v0_jsx-dev-runtime.ts
 .v0-trash/
 .vercel/
 
-# Environment variables
-.env*.local
-
-# Common ignores
-node_modules
+# ── Node (if any frontend) ────────────────────────────────
+node_modules/
 .next/
-.DS_Store
